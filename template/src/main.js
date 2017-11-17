@@ -4,6 +4,7 @@
 {{/if_eq}}
 import 'babel-polyfill'
 {{#onsen}}
+// 如果报字体引入错误 需要去node_module/onsenui下修改各个字体的引入方式 ../ => /
 import 'onsenui/css/onsenui.css'
 import 'onsenui/css/onsen-css-components.css'
 {{/onsen}}
@@ -35,12 +36,7 @@ new Vue({
   store,
   {{/vuex}}
   {{#if_eq build "runtime"}}
-  render: h => h(App){{#if_eq lintConfig "airbnb"}},{{/if_eq}}
-  {{/if_eq}}
-  {{#if_eq build "standalone"}}
-  template: '<App/>',
-  components: { App }{{#if_eq lintConfig "airbnb"}},{{/if_eq}}
-  {{/if_eq}}{{#onsen}},
+  render: h => h(App){{#if_eq lintConfig "airbnb"}},{{/if_eq}}{{/if_eq}}{{#onsen}},
   beforeCreate () {
     // 设置默认的样式为iPhone
     this.$ons.platform.select('iPhone')

@@ -36,7 +36,7 @@ module.exports = {
   module: {
     rules: [
       {{#lint}}
-      ...(config.dev.useEslint? [{
+      ...(config.dev.useEslint ? [{
         test: /\.(js|vue)$/,
         loader: 'eslint-loader',
         enforce: 'pre',
