@@ -1,4 +1,14 @@
 <template>
+  {{#onsen}}
+  <v-ons-page>
+    <v-ons-toolbar>
+      <div class="center">hello world</div>
+    </v-ons-toolbar>
+    <div class="content">
+      hello world
+    </div>
+  </v-ons-page>
+  {{else}}
   <div class="hello">
     <h1>\{{ msg }}</h1>
     <h2>Essential Links</h2>
@@ -18,6 +28,7 @@
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
     </ul>
   </div>
+  {{/onsen}}
 </template>
 
 <script>

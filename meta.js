@@ -40,9 +40,13 @@ module.exports = {
         }
       ]
     },
-    "router": {
+    "onsen": {
       "type": "confirm",
-      "message": "Install vue-router?"
+      "message": "Install onsen-ui?"
+    },
+    "vuex": {
+      "type": "confirm",
+      "message": "Install vuex?"
     },
     "lint": {
       "type": "confirm",
@@ -113,7 +117,7 @@ module.exports = {
     "test/unit/specs/index.js": "unit && runner === 'karma'",
     "test/unit/setup.js": "unit && runner === 'jest'",
     "test/e2e/**/*": "e2e",
-    "src/router/**/*": "router"
+    "src/store/**/*": "vuex"
   },
   "completeMessage": "To get started:\n\n  {{^inPlace}}cd {{destDirName}}\n  {{/inPlace}}npm install\n  npm run dev\n\nDocumentation can be found at https://vuejs-templates.github.io/webpack"
 };

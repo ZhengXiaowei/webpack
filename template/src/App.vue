@@ -1,11 +1,16 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    {{#router}}
-    <router-view/>
+    {{#onsen}}
+     <v-ons-navigator swipeable
+                     animation="lift"
+                     swipe-target-width="80px"
+                     swipe-threshold="0.4"
+                     :page-stack="pageStack"
+                     :pop-page="goBack">
+    </v-ons-navigator>
     {{else}}
-    <HelloWorld/>
-    {{/router}}
+    <router-view></router-view>
+    {{/onsen}}
   </div>
 </template>
 
@@ -15,10 +20,29 @@ import HelloWorld from './components/HelloWorld'{{#if_eq lintConfig "airbnb"}};{
 
 {{/unless}}
 export default {
-  name: 'app'{{#router}}{{#if_eq lintConfig "airbnb"}},{{/if_eq}}{{else}},
+  name: 'app'{{#if_eq lintConfig "airbnb"}},{{/if_eq}},
   components: {
     HelloWorld{{#if_eq lintConfig "airbnb"}},{{/if_eq}}
-  }{{#if_eq lintConfig "airbnb"}},{{/if_eq}}{{/router}}
+  }{{#onsen}}{{#if_eq lintConfig "airbnb"}},{{/if_eq}}{{else}},
+  data () {
+    return {
+      pageStack: []
+    }
+  },
+  methods: {
+    goBack () {
+      // Go to the parent route component
+      this.$router.push({ name: this.$route.matched[this.$route.matched.length - 2].name })
+      // this.$router.go(-1); // Could work but might be misleading in some situations
+    }
+  },
+  created () {
+    const mapRouteStack = route => (this.pageStack = route.matched.map(m => m.components.default))
+    mapRouteStack(this.$route)
+    /* On route change, reset the pageStack to the next route */
+    this.$router.beforeEach((to, from, next) => mapRouteStack(to) && next())
+  }
+  {{/onsen}}
 }{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
 </script>
 
