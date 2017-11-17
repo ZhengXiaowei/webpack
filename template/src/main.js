@@ -35,8 +35,7 @@ new Vue({
   {{#vuex}}
   store,
   {{/vuex}}
-  {{#if_eq build "runtime"}}
-  render: h => h(App){{#if_eq lintConfig "airbnb"}},{{/if_eq}}{{/if_eq}}{{#onsen}},
+  render: h => h(App){{#if_eq lintConfig "airbnb"}},{{/if_eq}}{{#onsen}},
   beforeCreate () {
     // 设置默认的样式为iPhone
     this.$ons.platform.select('iPhone')
