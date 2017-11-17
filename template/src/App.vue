@@ -23,7 +23,7 @@ export default {
   name: 'app'{{#if_eq lintConfig "airbnb"}},{{/if_eq}},
   components: {
     HelloWorld{{#if_eq lintConfig "airbnb"}},{{/if_eq}}
-  }{{#onsen}}{{#if_eq lintConfig "airbnb"}},{{/if_eq}}{{else}},
+  }{{#if_eq lintConfig "airbnb"}},{{/if_eq}}{{#onsen}},
   data () {
     return {
       pageStack: []
@@ -41,8 +41,7 @@ export default {
     mapRouteStack(this.$route)
     /* On route change, reset the pageStack to the next route */
     this.$router.beforeEach((to, from, next) => mapRouteStack(to) && next())
-  }
-  {{/onsen}}
+  }{{/onsen}}
 }{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
 </script>
 

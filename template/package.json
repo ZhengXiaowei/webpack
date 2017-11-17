@@ -24,8 +24,8 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "vue": "^2.5.2"{{#router}},
-    "vue-router": "^3.0.1"{{/router}}{{#onsen}},
+    "vue": "^2.5.2",
+    "vue-router": "^3.0.1"{{#onsen}},
     "onsenui": "^2.7.0",
     "vue-onsenui": "^2.3.0"{{/onsen}},
     "fastclick": "^1.0.6",
