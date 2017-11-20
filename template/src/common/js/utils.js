@@ -64,16 +64,117 @@ export function debounce (func, delay) {
 }
 
 /**
- * 将手机号中间四位隐藏
+ * 字符串复制
  * @author ZhengXiaowei(503325017@qq.com)
  * @export
- * @param {any} phoneNum 手机号
+ * @param {any} str 要复制的字符串
+ * @param {any} count 复制的次数
  * @returns
  */
-export function hidePhone (phoneNum) {
-  // 截取手机中间四位
-  let midllePhone = phoneNum.substr(3, 4)
-  return phoneNum.replace(midllePhone, '****')
+export function repeatStr (str, count) {
+  let text = ''
+  for (let i = 0; i < count; i++) {
+      text += str
+  }
+  return text
+}
+
+/**
+ * 字符串替换
+ * @author ZhengXiaowei(503325017@qq.com)
+ * @export
+ * @param {any} str 要替换的字符串
+ * @param {any} regArr 字符串替换规则
+ * @param {any} type 类型 0-将数组中间位或者数组里的数字长度的字符进行替换 1-和0相反
+ * @param {any} ARepText 要替换成什么字符 默认*
+ * @returns
+ */
+export function replaceStr (str, regArr, type, ARepText) {
+  var regtext = '', Reg = null, replaceText = ARepText || '*';
+  //replaceStr('18819322663',[3,5,3],0)
+  //188*****663
+  if (regArr.length === 3 && type === 0) {
+      regtext = '(\\w{' + regArr[0] + '})\\w{' + regArr[1] + '}(\\w{' + regArr[2] + '})'
+      Reg = new RegExp(regtext);
+      var replaceCount = repeatStr(replaceText, regArr[1]);
+      return str.replace(Reg, '$1' + replaceCount + '$2')
+  }
+  //replaceStr('asdasdasdaa',[3,5,3],1)
+  //***asdas***
+  else if (regArr.length === 3 && type === 1) {
+      regtext = '\\w{' + regArr[0] + '}(\\w{' + regArr[1] + '})\\w{' + regArr[2] + '}'
+      Reg = new RegExp(regtext);
+      var replaceCount1 = repeatSte(replaceText, regArr[0]);
+      var replaceCount2 = repeatSte(replaceText, regArr[2]);
+      return str.replace(Reg, replaceCount1 + '$1' + replaceCount2)
+  }
+  //replaceStr('1asd88465asdwqe3',[5],0)
+  //*****8465asdwqe3
+  else if (regArr.length === 1 && type === 0) {
+      regtext = '(^\\w{' + regArr[0] +  '})'
+      Reg = new RegExp(regtext);
+      var replaceCount = repeatSte(replaceText, regArr[0]);
+      return str.replace(Reg, replaceCount)
+  }
+  //replaceStr('1asd88465asdwqe3',[5],1,'+')
+  //"1asd88465as+++++"
+  else if (regArr.length === 1 && type === 1) {
+      regtext = '(\\w{' + regArr[0] +  '}$)'
+      Reg = new RegExp(regtext);
+      var replaceCount = repeatSte(replaceText, regArr[0]);
+      return str.replace(Reg, replaceCount)
+  }
+}
+
+/**
+ * 检测用户输入的密码强度
+ * @author ZhengXiaowei(503325017@qq.com)
+ * @export
+ * @param {any} str 密码
+ * @returns
+ */
+export function checkPwd (str) {
+  var nowLv = 0;
+  if (str.length < 6) {
+      return nowLv
+  }
+  if (/[0-9]/.test(str)) {
+      nowLv++
+  }
+  if (/[a-z]/.test(str)) {
+      nowLv++
+  }
+  if (/[A-Z]/.test(str)) {
+      nowLv++
+  }
+  if (/[\.|-|_]/.test(str)) {
+      nowLv++
+  }
+  return nowLv
+}
+
+/**
+ * 数组去重
+ * @author ZhengXiaowei(503325017@qq.com)
+ * @export
+ * @param {any} arr 数组
+ * @returns
+ */
+export function removeRepeatArray (arr) {
+  return Array.from(new Set(arr))
+}
+
+/**
+ * 重置数组顺序(打乱)
+ * @author ZhengXiaowei(503325017@qq.com)
+ * @export
+ * @param {any} arr 数组
+ * @returns 
+ */
+export function upsetArr (arr) {
+  return arr.sort(() => {
+    return Math.random() - 0.5
+  })
 }
 
 /**
@@ -150,7 +251,7 @@ export function isEmail (str) {
  * @returns
  */
 export function isPhoneNum (str) {
-  return /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/.test(str)
+  return /^1[3|4|5|7|8]\d{9}/.test(str)
 }
 
 /**
