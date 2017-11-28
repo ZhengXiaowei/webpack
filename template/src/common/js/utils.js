@@ -74,11 +74,7 @@ export function debounce (func, delay) {
 export function repeatStr (str, count) {
   let text = ''
   for (let i = 0; i < count; i++) {
-<<<<<<< HEAD
     text += str
-=======
-      text += str
->>>>>>> origin/develop
   }
   return text
 }
@@ -94,7 +90,6 @@ export function repeatStr (str, count) {
  * @returns
  */
 export function replaceStr (str, regArr, type, ARepText) {
-<<<<<<< HEAD
   let regtext = ''
   let Reg = null
   let replaceText = ARepText || '*'
@@ -343,42 +338,6 @@ export function stringfyQueryString (obj) {
     pairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]))
   }
   return pairs.join('&')
-=======
-  var regtext = '', Reg = null, replaceText = ARepText || '*';
-  //replaceStr('18819322663',[3,5,3],0)
-  //188*****663
-  if (regArr.length === 3 && type === 0) {
-      regtext = '(\\w{' + regArr[0] + '})\\w{' + regArr[1] + '}(\\w{' + regArr[2] + '})'
-      Reg = new RegExp(regtext);
-      var replaceCount = repeatStr(replaceText, regArr[1]);
-      return str.replace(Reg, '$1' + replaceCount + '$2')
-  }
-  //replaceStr('asdasdasdaa',[3,5,3],1)
-  //***asdas***
-  else if (regArr.length === 3 && type === 1) {
-      regtext = '\\w{' + regArr[0] + '}(\\w{' + regArr[1] + '})\\w{' + regArr[2] + '}'
-      Reg = new RegExp(regtext);
-      var replaceCount1 = repeatSte(replaceText, regArr[0]);
-      var replaceCount2 = repeatSte(replaceText, regArr[2]);
-      return str.replace(Reg, replaceCount1 + '$1' + replaceCount2)
-  }
-  //replaceStr('1asd88465asdwqe3',[5],0)
-  //*****8465asdwqe3
-  else if (regArr.length === 1 && type === 0) {
-      regtext = '(^\\w{' + regArr[0] +  '})'
-      Reg = new RegExp(regtext);
-      var replaceCount = repeatSte(replaceText, regArr[0]);
-      return str.replace(Reg, replaceCount)
-  }
-  //replaceStr('1asd88465asdwqe3',[5],1,'+')
-  //"1asd88465as+++++"
-  else if (regArr.length === 1 && type === 1) {
-      regtext = '(\\w{' + regArr[0] +  '}$)'
-      Reg = new RegExp(regtext);
-      var replaceCount = repeatSte(replaceText, regArr[0]);
-      return str.replace(Reg, replaceCount)
-  }
->>>>>>> origin/develop
 }
 
 /**
@@ -391,19 +350,19 @@ export function stringfyQueryString (obj) {
 export function checkPwd (str) {
   var nowLv = 0;
   if (str.length < 6) {
-      return nowLv
+    return nowLv
   }
   if (/[0-9]/.test(str)) {
-      nowLv++
+    nowLv++
   }
   if (/[a-z]/.test(str)) {
-      nowLv++
+    nowLv++
   }
   if (/[A-Z]/.test(str)) {
-      nowLv++
+    nowLv++
   }
   if (/[\.|-|_]/.test(str)) {
-      nowLv++
+    nowLv++
   }
   return nowLv
 }
@@ -442,10 +401,10 @@ export function upsetArr (arr) {
 export function getCookie (name) {
   var arr = document.cookie.replace(/\s/g, "").split(';')
   for (var i = 0; i < arr.length; i++) {
-      var tempArr = arr[i].split('=')
-      if (tempArr[0] == name) {
-          return decodeURIComponent(tempArr[1])
-      }
+    var tempArr = arr[i].split('=')
+    if (tempArr[0] == name) {
+      return decodeURIComponent(tempArr[1])
+    }
   }
   return ''
 }
@@ -518,12 +477,12 @@ export function isPhoneNum (str) {
  */
 export function formatPassTime (startTime) {
   var currentTime = Date.parse(new Date()),
-      time = currentTime - startTime,
-      day = parseInt(time / (1000 * 60 * 60 * 24)),
-      hour = parseInt(time / (1000 * 60 * 60)),
-      min = parseInt(time / (1000 * 60)),
-      month = parseInt(day / 30),
-      year = parseInt(month / 12);
+    time = currentTime - startTime,
+    day = parseInt(time / (1000 * 60 * 60 * 24)),
+    hour = parseInt(time / (1000 * 60 * 60)),
+    min = parseInt(time / (1000 * 60)),
+    month = parseInt(day / 30),
+    year = parseInt(month / 12);
   if (year) return year + "年前"
   if (month) return month + "个月前"
   if (day) return day + "天前"
@@ -544,14 +503,14 @@ export function formatRemainTime (endTime) {
   var endDate = new Date(endTime) //结束时间
   var t = endDate.getTime() - startDate.getTime() //时间差
   var d = 0,
-      h = 0,
-      m = 0,
-      s = 0;
+    h = 0,
+    m = 0,
+    s = 0;
   if (t >= 0) {
-      d = Math.floor(t / 1000 / 3600 / 24)
-      h = Math.floor(t / 1000 / 60 / 60 % 24)
-      m = Math.floor(t / 1000 / 60 % 60)
-      s = Math.floor(t / 1000 % 60)
+    d = Math.floor(t / 1000 / 3600 / 24)
+    h = Math.floor(t / 1000 / 60 / 60 % 24)
+    m = Math.floor(t / 1000 / 60 % 60)
+    s = Math.floor(t / 1000 % 60)
   }
   return d + "天 " + h + "小时 " + m + "分钟 " + s + "秒"
 }
@@ -567,7 +526,7 @@ export function parseQueryString (url) {
   url = url == null ? window.location.href : url
   var search = url.substring(url.lastIndexOf('?') + 1)
   if (!search) {
-      return {}
+    return {}
   }
   return JSON.parse('{"' + decodeURIComponent(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}')
 }
@@ -584,14 +543,14 @@ export function stringfyQueryString (obj) {
   var pairs = []
 
   for (var key in obj) {
-      var value = obj[key]
-      if (value instanceof Array) {
-          for (var i = 0; i < value.length; ++i) {
-              pairs.push(encodeURIComponent(key + '[' + i + ']') + '=' + encodeURIComponent(value[i]));
-          }
-          continue
+    var value = obj[key]
+    if (value instanceof Array) {
+      for (var i = 0; i < value.length; ++i) {
+        pairs.push(encodeURIComponent(key + '[' + i + ']') + '=' + encodeURIComponent(value[i]));
       }
-      pairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]))
+      continue
+    }
+    pairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]))
   }
   return pairs.join('&')
 }
